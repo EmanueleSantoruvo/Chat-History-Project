@@ -1,7 +1,8 @@
-import java.io.IOException;
+import java.io.*;
 import java.net.*;
 
 public class Server{
+
     private ServerSocket ss;
 
     public Server(ServerSocket ss){
@@ -11,6 +12,7 @@ public class Server{
     public static void main(String[] args) throws IOException{
         ServerSocket servsock=new ServerSocket(25000);
         Server serv=new Server(servsock);
+        System.out.println("Server in ascolto...");
         serv.AvvioServer();
     }
 
@@ -18,12 +20,12 @@ public class Server{
         try {
             while(!ss.isClosed()){
                 Socket s=ss.accept();
-                System.out.println("Si e' collegato un nuovo client!:"+s.getRemoteSocketAddress()+s.getPort());
+                System.out.println("Si e' collegato un nuovo client,ecco le info:"+s.getRemoteSocketAddress());
                 ClientHandler ch=new ClientHandler(s);
                 Thread t=new Thread(ch);
                 t.start();
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Errore apertura server:"+e);
         }
     }
@@ -33,7 +35,7 @@ public class Server{
             if(ss != null){
                 ss.close();
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Errore chiusura server socket:"+e);
         }
     }
