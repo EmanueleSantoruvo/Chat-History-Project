@@ -33,6 +33,7 @@ public class Server{
     public void ChiudiServerSocket(){
         try {
             if(ss != null){
+                System.out.println("Si e' scollegato un client");
                 ss.close();
             }
         } catch (IOException e) {
