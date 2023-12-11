@@ -48,8 +48,6 @@ public class Server {
         try {
             // Verifica se il ServerSocket è diverso da null
             if (ss != null) {
-                // Stampa di un messaggio indicante la disconnessione di un client
-                System.out.println("Si e' scollegato un client");
                 // Chiusura del ServerSocket
                 ss.close();
             }

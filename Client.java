@@ -63,7 +63,6 @@ public class Client {
             }
         } catch (IOException e) {
             // Gestione dell'eccezione in caso di errore durante l'invio del messaggio
-            System.out.println("Errore invio messaggio client:" + e);
             // Chiusura di tutti i canali di comunicazione
             ChiudiTutto(s, br, bw);
         }
@@ -87,6 +86,7 @@ public class Client {
                     } catch (Exception e) {
                         // Gestione dell'eccezione in caso di errore durante la lettura del messaggio
                         ChiudiTutto(s, br, bw);
+                        break;
                     }
                 }
             }

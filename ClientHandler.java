@@ -97,22 +97,27 @@ public class ClientHandler implements Runnable {
             String mess = BR.readLine();
             // Invia un delimitatore di inizio cronologia al client
             bw.write("\n--INIZIO CRONOLOGIA--\n");
+            if(mess==null){
+                bw.write("Non c'è nessun messaggio nella cronologia");
+            }
             // Invia la cronologia al client
-            while (mess != null) {
+            while (mess != null){    
                 bw.write(mess);
                 bw.newLine();
                 bw.flush();
                 mess = BR.readLine();
             }
             // Invia un delimitatore di fine cronologia al client
-            bw.write("\n--FINE CRONOLOGIA--\n");
-            bw.newLine();
-            bw.flush();
+            if(mess==null){
+                bw.write("\n--FINE CRONOLOGIA--\n");
+                bw.newLine();
+                bw.flush();
+                BR.close(); 
+            }
             // Chiudi il lettore del file di log
-            BR.close();
         } catch (Exception e) {
             // Gestione dell'eccezione in caso di errore durante la lettura del file di log
-            System.out.println("Errore nella lettura del messaggio nel file:" + e);
+            System.out.println("Un utente deve cominciare a scrivere per far creare la cronologia");
         }
     }
     // Metodo per rimuovere il client dalla lista degli oggetti ClientHandler attivi e inviare un messaggio di disconnessione
@@ -135,6 +140,7 @@ public class ClientHandler implements Runnable {
             }
             // Chiudi il socket se non è nullo
             if (s != null) {
+                System.out.println("Client scollegato:"+s.getRemoteSocketAddress());
                 s.close();
             }
         } catch (IOException e) {
