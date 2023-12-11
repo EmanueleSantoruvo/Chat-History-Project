@@ -28,6 +28,10 @@ public class ClientHandler implements Runnable {
             clientHandlers.add(this);
             // Messaggio di broadcast informando che il client si è unito
             Broadcast("Server:" + clientname + " si e' unito");
+            //Eccezione nel caso non sia presente una cronologia
+            bw.write("ATTENZIONE! SE NON VEDI NESSUNA CRONOLOGIA,SIGNIFICA CHE NON E' PRESENTE,SCRIVERE PER FARLA APPARIRE QUANTO TI RICONNETTI\n");
+            bw.newLine();
+            bw.flush();
             // Leggi la cronologia e invia al nuovo client
             LeggiCronologia(bw);
         } catch (IOException e) {
@@ -109,7 +113,7 @@ public class ClientHandler implements Runnable {
             }
             // Invia un delimitatore di fine cronologia al client
             if(mess==null){
-                bw.write("\n--FINE CRONOLOGIA--\n");
+                bw.write("--FINE CRONOLOGIA--\n");
                 bw.newLine();
                 bw.flush();
                 BR.close(); 
