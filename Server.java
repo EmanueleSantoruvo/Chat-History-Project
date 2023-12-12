@@ -42,18 +42,5 @@ public class Server {
             System.out.println("Errore apertura server:" + e);
         }
     }
-
-    // Metodo per chiudere il ServerSocket
-    public void ChiudiServerSocket() {
-        try {
-            // Verifica se il ServerSocket è diverso da null
-            if (ss != null) {
-                // Chiusura del ServerSocket
-                ss.close();
-            }
-        } catch (IOException e) {
-            // Gestione dell'eccezione in caso di errore nella chiusura del ServerSocket
-            System.out.println("Errore chiusura server socket:" + e);
-        }
-    }
 }
+
